@@ -1,4 +1,6 @@
 .dart_tool/
+.cxx/
+.idea/
 .packages
 build/
 pubspec.lock

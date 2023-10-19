@@ -9,8 +9,7 @@ void main() async {
   await init();
 
   test('thumbnail and blurhash', () async {
-    final im = Image();
-    im.loadRGBA(800, 600, Uint8List(800 * 600 * 4));
+    final im = Image.loadRGBA(800, 600, Uint8List(800 * 600 * 4));
     final im2 = im.resample(80, 60, Transform.lanczos);
     final blob = await im2.toJpeg(70);
     final blurhash = im2.toBlurhash(4, 3);
@@ -23,8 +22,7 @@ void main() async {
   });
 
   test('get metadata', () async {
-    final im = Image();
-    im.loadRGBA(200, 100, Uint8List(200 * 100 * 4));
+    final im = Image.loadRGBA(200, 100, Uint8List(200 * 100 * 4));
     expect(im.mode, 'RGBA');
     expect(im.width, 200);
     expect(im.height, 100);
@@ -32,8 +30,7 @@ void main() async {
   });
 
   test('gaussian blur', () async {
-    final im = Image();
-    im.loadRGBA(800, 600, Uint8List(800 * 600 * 4));
+    final im = Image.loadRGBA(800, 600, Uint8List(800 * 600 * 4));
     final im2 = im.gaussianBlur(10, 2);
     im.free();
     im2.free();

@@ -9,7 +9,7 @@ this.Image = class Image {
   loadRGBA(width, height, data) {
     const mem = m._malloc(width * height * 4);
     new Uint8ClampedArray(m.HEAPU8.buffer, mem, width * height * 4).set(data);
-    this._inst = m._imageFromRGBA(width, height, mem);
+    return new Image(m._imageFromRGBA(width, height, mem));
   }
 
   free() {
@@ -38,7 +38,11 @@ this.Image = class Image {
   }
 
   get block() {
-    return new Uint8ClampedArray(m.HEAPU8.buffer, m._imageBlock(this._inst), this.height * this.linesize);
+    return new Uint8ClampedArray(
+      m.HEAPU8.buffer,
+      m._imageBlock(this._inst),
+      this.height * this.linesize
+    );
   }
 
   copy() {
@@ -98,26 +102,37 @@ this.Image = class Image {
   }
 
   resample(width, height, mode) {
-    const modeidx = ["nearest", "lanczos", "bilinear", "bicubic", "box", "hamming"].indexOf(mode.toString().split(".").slice(-1)[0]);
+    const modeidx = [
+      "nearest",
+      "lanczos",
+      "bilinear",
+      "bicubic",
+      "box",
+      "hamming",
+    ].indexOf(mode.toString().split(".").slice(-1)[0]);
     const sp = m.stackSave();
     try {
       const box = m.stackAlloc(4 * 4);
       m.HEAPF32.set([0, 0, this.width, this.height], box / 4);
-      return new Image(m._ImagingResample(this._inst, width, height, modeidx, box));
+      return new Image(
+        m._ImagingResample(this._inst, width, height, modeidx, box)
+      );
     } finally {
       m.stackRestore(sp);
     }
   }
 
   toBlurhash(xComponents, yComponents) {
-    return m.UTF8ToString(m._blurHashForImage(this._inst, xComponents, yComponents));
+    return m.UTF8ToString(
+      m._blurHashForImage(this._inst, xComponents, yComponents)
+    );
   }
 
   async loadEncodedPromise(bytes) {
     var url = URL.createObjectURL(new Blob([bytes]));
     try {
       var img = new window.Image();
-      await new Promise(function(resolve, reject) {
+      await new Promise(function (resolve, reject) {
         img.onload = resolve;
         img.onerror = reject;
         img.src = url;
@@ -141,10 +156,10 @@ this.Image = class Image {
     const im = new ImageData(this.block, c.width, c.height);
     const ctx = c.getContext("2d");
     ctx.putImageData(im, 0, 0);
-    const blob = await new Promise(function(resolve, reject) {
-      c.toBlob(resolve, "image/jpeg", {quality: quality / 100});
+    const blob = await new Promise(function (resolve, _reject) {
+      c.toBlob(resolve, "image/jpeg", { quality: quality / 100 });
     });
     const arraybuf = await blob.arrayBuffer();
     return new Uint8Array(arraybuf);
   }
-}
+};

@@ -25,22 +25,28 @@ enum Transform {
   hamming,
 }
 
-class Image {
+class Image implements Finalizable {
+  static final _finalizer = NativeFinalizer(ImagingDeleteAddress.cast());
   Pointer<NativeType> _inst;
 
-  Image();
-  Image._(this._inst);
+  Image._(this._inst) {
+    _finalizer.attach(this, _inst.cast(),
+        detach: this, externalSize: width * height);
+  }
 
-  void loadRGBA(int width, int height, List<int> data) {
+  factory Image.loadRGBA(int width, int height, List<int> data) {
     assert(data.length == width * height * 4);
     final mem = malloc.call<Uint8>(data.length);
     mem.asTypedList(data.length).setAll(0, data);
-    _inst = imageFromRGBA(width, height, mem);
+    return Image._(imageFromRGBA(width, height, mem));
   }
 
   void free() {
-    ImagingDelete(_inst);
-    _inst = nullptr;
+    if (_inst != nullptr) {
+      _finalizer.detach(this);
+      ImagingDelete(_inst);
+      _inst = nullptr;
+    }
   }
 
   Pointer<Utf8> get _mode => imageMode(_inst);
@@ -127,7 +133,7 @@ class Image {
     }
   }
 
-  Future<void> loadEncoded(Uint8List bytes) {
+  static Future<Image> loadEncoded(Uint8List bytes) {
     throw UnsupportedError(
         'native_imaging loadEncoded is available on Web only');
   }

@@ -26,8 +26,7 @@ enum Transform {
 
 @JS()
 class Image {
-  external Image();
-  external void loadRGBA(int width, int height, List<int> data);
+  external Image loadRGBA(int width, int height, List<int> data);
   external void free();
   external String get mode;
   external int get width;
@@ -50,7 +49,7 @@ class Image {
 }
 
 extension ImageFutures on Image {
-  Future<void> loadEncoded(Uint8List bytes) {
+  Future<Image> loadEncoded(Uint8List bytes) {
     return promiseToFuture(loadEncodedPromise(bytes));
   }
 
