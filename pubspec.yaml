@@ -8,16 +8,14 @@ homepage: https://famedly.gitlab.io/libraries/native_imaging/
 repository: https://gitlab.com/famedly/libraries/native_imaging
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
 
 dependencies:
   js: ^0.6.0
-  ffi: ^1.0.0
-  test: ^1.9.0
-  pedantic: ^1.9.2
+  ffi: ^2.0.0
 
 dev_dependencies:
-  test_coverage: ^0.4.0
+  test: ^1.9.0
 
 flutter:
   plugin:
