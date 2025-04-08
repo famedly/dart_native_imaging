@@ -4,7 +4,7 @@
 library js;
 
 import 'dart:async';
-import 'dart:js_util';
+import 'dart:js_interop';
 import 'dart:typed_data';
 
 import 'package:js/js.dart';
@@ -13,7 +13,7 @@ import 'package:js/js.dart';
 external dynamic _init();
 
 Future<void> init() {
-  return promiseToFuture(_init());
+  return (_init() as JSPromise).toDart.then((_) {});
 }
 
 enum Transform {
@@ -30,7 +30,9 @@ class Image {
   external static Image fromRGBA(int width, int height, List<int> data);
   external static dynamic loadEncodedPromise(Uint8List bytes);
   static Future<Image> loadEncoded(Uint8List bytes) =>
-      promiseToFuture(loadEncodedPromise(bytes));
+      (loadEncodedPromise(bytes) as JSPromise)
+          .toDart
+          .then((value) => value as Image);
   external void free();
   external String get mode;
   external int get width;
@@ -52,6 +54,7 @@ class Image {
 }
 
 extension ImageFutures on Image {
-  Future<Uint8List> toJpeg(int quality) =>
-      promiseToFuture(toJpegPromise(quality));
+  Future<Uint8List> toJpeg(int quality) => (toJpegPromise(quality) as JSPromise)
+      .toDart
+      .then((value) => value as Uint8List);
 }
