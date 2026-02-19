@@ -17,6 +17,11 @@ cmake_dependent_option(SYSTEM_LIBJPEG "use system libjpeg" OFF JPEG_ENCODE OFF)
 
 add_definitions(-DBMP_SUPPORTED -DPPM_SUPPORTED)
 add_library(Imaging SHARED Blend.c BoxBlur.c Copy.c Except.c extra.c Geometry.c Palette.c Resample.c Storage.c blurhash/encode.c)
+
+target_link_options(Imaging PRIVATE
+    "-Wl,-z,max-page-size=16384"
+)
+
 target_include_directories(Imaging PRIVATE blurhash)
 target_link_libraries(Imaging m)
 

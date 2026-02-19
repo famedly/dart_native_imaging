@@ -27,9 +27,9 @@ Imaging imageFromRGBA(int width, int height, uint8_t* data)
 		data += im->linesize;
 	}
 	if (im->pixelsize & 3) {
-		im->image8 = im->image;
+		im->image8 = (uint8_t **)im->image;
 	} else {
-		im->image32 = im->image;
+		im->image32 = (int32_t **)im->image;
 	}
 	return im;
 }

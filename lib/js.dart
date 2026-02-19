@@ -4,7 +4,7 @@
 library js;
 
 import 'dart:async';
-import 'dart:js_util';
+import 'dart:html_common';
 import 'dart:typed_data';
 
 import 'package:js/js.dart';
