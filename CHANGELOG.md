@@ -1,3 +1,7 @@
+# 0.3.0
+- build: Changelog for 0.2.0 (Krille)
+- fix: support 16kb page alignment (td)
+
 # 0.2.0
 - refactor: Remove deprecated flutter v1 android reference (Krille)
 
