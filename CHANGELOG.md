@@ -1,3 +1,7 @@
+# 0.4.0
+- fix: add HEAPF32 export (td)
+- fix: add HEAPU8 export (td)
+
 # 0.3.0
 - build: Changelog for 0.2.0 (Krille)
 - fix: support 16kb page alignment (td)
