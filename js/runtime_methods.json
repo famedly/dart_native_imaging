@@ -3,5 +3,6 @@
   "stackSave",
   "stackRestore",
   "UTF8ToString",
-  "HEAPU8"
+  "HEAPU8",
+  "HEAPF32"
 ]
