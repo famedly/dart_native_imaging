@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 name: native_imaging
-version: 0.3.0
+version: 0.4.0
 description: Dart bindings for Imaging from Pillow with jpeg and blurhash encoders
 homepage: https://github.com/famedly/dart_native_imaging
 repository: https://github.com/famedly/dart_native_imaging/issues
