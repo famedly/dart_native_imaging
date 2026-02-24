@@ -2,5 +2,7 @@
   "stackAlloc",
   "stackSave",
   "stackRestore",
-  "UTF8ToString"
+  "UTF8ToString",
+  "HEAPU8",
+  "HEAPF32"
 ]
