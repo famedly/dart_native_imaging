@@ -74,7 +74,7 @@ static inline double sinc_filter(double x)
 static inline double lanczos_filter(double x)
 {
     /* truncated sinc */
-    if (-3.0 <= x && x < 3.0) {
+    if (-3.0 < x && x < 3.0) {
         return sinc_filter(x) * sinc_filter(x/3);
     }
     return 0.0;
