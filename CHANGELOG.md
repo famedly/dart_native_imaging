@@ -1,3 +1,6 @@
+# 0.5.0
+- feat: migrate web bindings to dart:js_interop for Wasm compatibility
+
 # 0.4.0
 - fix: add HEAPF32 export (td)
 - fix: add HEAPU8 export (td)

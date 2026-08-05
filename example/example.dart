@@ -8,8 +8,8 @@ import 'dart:io';
 void main() async {
   await native.init();
 
-  final width = 800;
-  final height = 600;
+  const width = 800;
+  const height = 600;
   var nativeImg =
       native.Image.fromRGBA(width, height, Uint8List(width * height * 4));
 
@@ -31,6 +31,7 @@ void main() async {
   final blurhash = nativeImg.toBlurhash(3, 3);
   nativeImg.free();
 
+  // ignore: avoid_print
   print('Blurhash: $blurhash');
   File('output.jpg').writeAsBytesSync(jpegBytes);
 }
