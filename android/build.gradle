@@ -52,7 +52,7 @@ android {
 
     externalNativeBuild {
         cmake {
-            path "../ios/src/CMakeLists.txt"
+            path "../ios/native_imaging/Sources/native_imaging/src/CMakeLists.txt"
         }
     }
 }

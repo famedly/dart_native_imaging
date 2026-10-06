@@ -1,3 +1,7 @@
+# 1.0.0
+- feat: add SPM support
+- build: set minimum iOS version to 15.0
+
 # 0.5.0
 - feat: migrate web bindings to dart:js_interop for Wasm compatibility
 

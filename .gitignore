@@ -24,3 +24,5 @@ migrate_working_dir/
 .pub/
 build/
 
+.build/
+.swiftpm/
