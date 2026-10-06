@@ -4,5 +4,5 @@
 
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release ../ios/src
+cmake -DCMAKE_BUILD_TYPE=Release ../ios/native_imaging/Sources/native_imaging/src
 cmake --build .
