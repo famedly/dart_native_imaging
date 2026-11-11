@@ -2,15 +2,13 @@ group 'com.example.native_imaging'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.24'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:9.1.0'
     }
 }
 
@@ -22,12 +20,12 @@ rootProject.allprojects {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.example.native_imaging'
+    compileSdk 34
+
     defaultConfig {
-        compileSdk 34
         minSdkVersion 21
     }
 
@@ -36,17 +34,11 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-    
-    lintOptions {
+
+    lint {
         disable 'InvalidPackage'
     }
 
@@ -57,6 +49,8 @@ android {
     }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
 }
