@@ -1,7 +1,7 @@
 # 2.0.0
 
 - build(android): migrate to AGP 9.1 and Gradle 9.3.1 (yurtemre7)
-- **Breaking:** Android apps must use AGP 9+ with built-in Kotlin enabled (`android.builtInKotlin=true`, the AGP 9 default) (yurtemre7)
+- **Breaking:** Android apps must use AGP 9+ (yurtemre7)
 - chore: align CODEOWNERS with current team structure (Niklas Zender)
 - ci: pin Flutter 3.47.9 and load versions.env in app and publish jobs (yurtemre7)
 - feat: add example app (yurtemre7)
