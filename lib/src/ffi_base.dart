@@ -6,10 +6,12 @@ import 'dart:io';
 
 final libImaging = Platform.isIOS
     ? DynamicLibrary.process()
-    : DynamicLibrary.open(Platform.isAndroid
-        ? 'libImaging.so'
-        : Platform.isWindows
+    : DynamicLibrary.open(
+        Platform.isAndroid
+            ? 'libImaging.so'
+            : Platform.isWindows
             ? 'libImaging.dll'
             : Platform.isMacOS
-                ? 'libImaging.dylib'
-                : 'libImaging.so');
+            ? 'libImaging.dylib'
+            : 'libImaging.so',
+      );
