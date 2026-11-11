@@ -13,14 +13,7 @@ Future<void> init() async {
 }
 
 // don't change the order!
-enum Transform {
-  nearest,
-  lanczos,
-  bilinear,
-  bicubic,
-  box,
-  hamming,
-}
+enum Transform { nearest, lanczos, bilinear, bicubic, box, hamming }
 
 @JS('Imaging.Image')
 extension type Image._(JSObject _) implements JSObject {
@@ -67,4 +60,3 @@ extension type Image._(JSObject _) implements JSObject {
   Future<Uint8List> toJpeg(int quality) async =>
       (await toJpegPromise(quality).toDart).toDart;
 }
-

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.22)
 project(Imaging)
 include(CMakeDependentOption)
 
@@ -21,9 +21,11 @@ if(EMSCRIPTEN)
   add_library(Imaging STATIC Blend.c BoxBlur.c Copy.c Except.c extra.c Geometry.c Palette.c Resample.c Storage.c blurhash/encode.c)
 else()
   add_library(Imaging SHARED Blend.c BoxBlur.c Copy.c Except.c extra.c Geometry.c Palette.c Resample.c Storage.c blurhash/encode.c)
-  target_link_options(Imaging PRIVATE
-      "-Wl,-z,max-page-size=16384"
-  )
+  if(NOT APPLE)
+    target_link_options(Imaging PRIVATE
+        "-Wl,-z,max-page-size=16384"
+    )
+  endif()
 endif()
 
 target_include_directories(Imaging PRIVATE blurhash)

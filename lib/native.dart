@@ -18,14 +18,7 @@ Future<void> init() {
 }
 
 // don't change the order!
-enum Transform {
-  nearest,
-  lanczos,
-  bilinear,
-  bicubic,
-  box,
-  hamming,
-}
+enum Transform { nearest, lanczos, bilinear, bicubic, box, hamming }
 
 class Image {
   Pointer<NativeType> _inst;
@@ -110,9 +103,12 @@ class Image {
   Image resample(int width, int height, Transform mode) {
     final box = malloc.call<Float>(4);
     try {
-      box
-          .asTypedList(4)
-          .setAll(0, [0, 0, this.width.toDouble(), this.height.toDouble()]);
+      box.asTypedList(4).setAll(0, [
+        0,
+        0,
+        this.width.toDouble(),
+        this.height.toDouble(),
+      ]);
       return Image._(ImagingResample(_inst, width, height, mode.index, box));
     } finally {
       malloc.free(box);
@@ -130,7 +126,8 @@ class Image {
 
   static Future<Image> loadEncoded(Uint8List bytes) {
     throw UnsupportedError(
-        'native_imaging loadEncoded is available on Web only');
+      'native_imaging loadEncoded is available on Web only',
+    );
   }
 
   Future<Uint8List> toJpeg(int quality) {
